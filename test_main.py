@@ -17,7 +17,7 @@ Author: Hassan Kashif
 """
 import pytest
 
-from main import get_letter_score, calculate_word_score, assign_tiles, get_valid_words
+from main import get_letter_score, calculate_word_score, assign_tiles, get_valid_words, get_words
 
 def test_get_letter_score_correct_score():
     test_parameter = "G"
@@ -50,10 +50,9 @@ def test_calculate_word_score_invalid_parameter():
         calculate_word_score(test_parameter)
 
 def test_assign_tiles():
-    expected_return_length = 7
-    assert len(assign_tiles()) == expected_return_length
+    NUMBER_OF_TILES = 7
+    assert len(assign_tiles(NUMBER_OF_TILES)) == NUMBER_OF_TILES
 
 def test_get_valid_words_return():
     test_parameter = ['N', 'S', 'E', 'U', 'L', 'I', 'D']
-    expected_return_type = []
-    assert isinstance(get_valid_words(test_parameter), expected_return_type)
+    assert isinstance(get_valid_words(test_parameter), set)

@@ -18,7 +18,9 @@ Author: Hassan Kashif
 
 import random
 
-def get_words() -> list:
+NUMBER_OF_TILES = 7
+
+def get_words(n: int) -> list:
     """
     Return a list of words based on words found in dictionary.txt. 
 
@@ -26,10 +28,12 @@ def get_words() -> list:
     valid_words (list): A list of valid words 
     """
     with open("dictionary.txt", "r") as file: 
-        return file.readlines()
+        all_words = file.readlines()
+    
+    return [word.upper() for word in all_words if len(word) <= NUMBER_OF_TILES]
 
 
-VALID_WORDS = get_words()
+WORDS = get_words(NUMBER_OF_TILES)
 
 def get_letter_score(letter: str) -> int:
     """
@@ -86,7 +90,7 @@ def calculate_word_score(word: str) -> int:
 
     return sum(get_letter_score(letter) for letter in word)
 
-def assign_tiles() -> list[str]:
+def assign_tiles(n: int) -> list[str]:
     """
     Assign a set of random tiles (characters) to a player rack (list). 
 
@@ -101,7 +105,7 @@ def assign_tiles() -> list[str]:
     print(random.sample(bag, 7))
     return random.sample(bag, 7)
 
-def get_valid_words(rack: list[str]) -> list:
+def get_valid_words(rack: list[str]) -> set:
     """
     Check if a Word is Valid Based on a Set of Tiles and a Dictionary.
 
@@ -111,7 +115,21 @@ def get_valid_words(rack: list[str]) -> list:
     exists in 'dictionary.txt', which contains a list of valid Scrabble words.
 
     Returns:
-    valid_words (list): A list of valid words which can be formed formed from a specified set of seven tiles 
+    valid_words (set): A set of valid words which can be formed formed from a specified set of seven tiles 
     """
-    
-    
+    valid_words = set()
+    for word in WORDS:
+        word = word.strip().upper()
+        temp_rack = rack.copy()
+        
+        for letter in word:
+            if letter in temp_rack:
+                temp_rack.remove(letter)
+            else:
+                break
+        else:
+            valid_words.add(word)
+
+    return valid_words
+
+
