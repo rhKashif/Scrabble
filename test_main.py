@@ -17,7 +17,7 @@ Author: Hassan Kashif
 """
 import pytest
 
-from main import get_letter_score, calculate_word_score
+from main import get_letter_score, calculate_word_score, assign_tiles
 
 def test_get_letter_score_correct_score():
     test_parameter = "G"
@@ -49,3 +49,6 @@ def test_calculate_word_score_invalid_parameter():
     with pytest.raises(TypeError):
         calculate_word_score(test_parameter)
 
+def test_assign_tiles():
+    expected_return_length = 7
+    assert len(assign_tiles()) == expected_return_length

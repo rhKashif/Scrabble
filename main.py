@@ -16,6 +16,8 @@ Note:
 Author: Hassan Kashif
 """
 
+import random
+
 def get_letter_score(letter: str) -> int:
     """
     Return the Score associated with a Given Letter in Scrabble.
@@ -70,3 +72,18 @@ def calculate_word_score(word: str) -> int:
         raise TypeError("Input parameter must be a string containing only alphabetic characters")
 
     return sum(get_letter_score(letter) for letter in word)
+
+def assign_tiles() -> list[str]:
+    """
+    Assign a set of random tiles (characters) to a player rack (list). 
+
+    This function is responsible for randomly selecting and assigning seven tiles from the English alphabet 
+    to a player's rack in a Scrabble game. The selection of tiles is based on the standard distribution of 
+    letters in Scrabble, where certain letters are more common than others.
+
+    Returns:
+    rack (list[str]): A list containing seven characters, each representing a tile assigned to the player's rack.
+    """
+    bag = ["E"] * 12 + ["A", "I"] * 9 + ["O"] * 8 + ["N", "R", "T"] * 6 + ["L", "S", "U", "D"] * 4 + ["G"] * 3 + ["B", "C", "M", "P", "F", "H", "V", "W", "Y"] * 2 + ["K", "J", "X", "Q", "Z"]
+    
+    return random.sample(bag, 7)
