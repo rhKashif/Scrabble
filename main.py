@@ -18,6 +18,19 @@ Author: Hassan Kashif
 
 import random
 
+def get_words() -> list:
+    """
+    Return a list of words based on words found in dictionary.txt. 
+
+    Returns:
+    valid_words (list): A list of valid words 
+    """
+    with open("dictionary.txt", "r") as file: 
+        return file.readlines()
+
+
+VALID_WORDS = get_words()
+
 def get_letter_score(letter: str) -> int:
     """
     Return the Score associated with a Given Letter in Scrabble.
@@ -85,5 +98,20 @@ def assign_tiles() -> list[str]:
     rack (list[str]): A list containing seven characters, each representing a tile assigned to the player's rack.
     """
     bag = ["E"] * 12 + ["A", "I"] * 9 + ["O"] * 8 + ["N", "R", "T"] * 6 + ["L", "S", "U", "D"] * 4 + ["G"] * 3 + ["B", "C", "M", "P", "F", "H", "V", "W", "Y"] * 2 + ["K", "J", "X", "Q", "Z"]
-    
+    print(random.sample(bag, 7))
     return random.sample(bag, 7)
+
+def get_valid_words(rack: list[str]) -> list:
+    """
+    Check if a Word is Valid Based on a Set of Tiles and a Dictionary.
+
+    This function returns a list of valid words which can be formed formed from a specified set of seven tiles 
+    and is a valid word according to the Scrabble dictionary. The validation is based on two criteria: 
+    first, whether the word can be constructed from the provided tiles, and second, whether the word 
+    exists in 'dictionary.txt', which contains a list of valid Scrabble words.
+
+    Returns:
+    valid_words (list): A list of valid words which can be formed formed from a specified set of seven tiles 
+    """
+    
+    
