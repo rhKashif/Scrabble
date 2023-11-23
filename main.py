@@ -33,7 +33,7 @@ def get_letter_score(letter: str) -> int:
     ValueError: If the input is not a string or contains non-alphabetic characters.
     """
     if not isinstance(letter, str) or len(letter) != 1 or not letter.isalpha():
-        raise TypeError("Input parameter to get_letter_score must be a single alphabetic character in str format")
+        raise TypeError("Input parameter must be a single alphabetic character string")
 
     letter_score_map = {
         "E": 1, "A": 1, "I": 1, "O": 1, "N": 1, "R": 1, "T": 1, "L": 1, "S": 1, "U": 1, 
@@ -66,11 +66,7 @@ def calculate_word_score(word: str) -> int:
     Raises:
     ValueError: If the input is not a string or contains non-alphabetic characters.
     """
-    if not isinstance(word, str):
-        raise TypeError("Input parameter to calculate_word_score must be in str format")
+    if not isinstance(word, str) or not word.isalpha():
+        raise TypeError("Input parameter must be a string containing only alphabetic characters")
 
-    score = 0
-    for letter in word: 
-        score += get_letter_score(letter)
-    
-    return score
+    return sum(get_letter_score(letter) for letter in word)
