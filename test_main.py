@@ -24,10 +24,20 @@ def test_get_letter_score_correct_score():
     expected_return = 2
     assert get_letter_score(test_parameter) == expected_return
 
-def test_get_letter_score_invalid_parameter():
-    test_parameter = ["INAVLID PARAMETER"]
+def test_get_letter_score_invalid_parameter_type():
+    test_parameter = []
     with pytest.raises(TypeError):
         get_letter_score(test_parameter)    
+
+def test_get_letter_score_invalid_parameter_length():
+    test_parameter = "INVALID PARAMETER"
+    with pytest.raises(TypeError):
+        get_letter_score(test_parameter) 
+
+def test_get_letter_score_invalid_parameter_character():
+    test_parameter = "2"
+    with pytest.raises(TypeError):
+        get_letter_score(test_parameter)      
 
 def test_calculate_word_score_correct_score():
     test_parameter = "GUARDIAN"
@@ -35,7 +45,7 @@ def test_calculate_word_score_correct_score():
     assert calculate_word_score(test_parameter) == expected_return
 
 def test_calculate_word_score_invalid_parameter():
-    test_parameter = ["INAVLID PARAMETER"]
+    test_parameter = ["INVALID PARAMETER"]
     with pytest.raises(TypeError):
         calculate_word_score(test_parameter)
 

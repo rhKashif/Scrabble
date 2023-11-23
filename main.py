@@ -32,8 +32,22 @@ def get_letter_score(letter: str) -> int:
     Raises:
     ValueError: If the input is not a string or contains non-alphabetic characters.
     """
-    if not isinstance(letter, str):
-        raise TypeError("Input parameter to get_letter_score must be in str format")
+    if not isinstance(letter, str) or len(letter) != 1 or not letter.isalpha():
+        raise TypeError("Input parameter to get_letter_score must be a single alphabetic character in str format")
+
+    letter_score_map = {
+        "E": 1, "A": 1, "I": 1, "O": 1, "N": 1, "R": 1, "T": 1, "L": 1, "S": 1, "U": 1, 
+        "D": 2, "G": 2,
+        "B": 3, "C": 3, "M": 3, "P": 3,
+        "F": 4, "H": 4, "V": 4, "W": 4, "Y": 4,
+        "K": 5,
+        "J": 8, "X": 8,
+        "Q": 10, "Z": 10
+    }
+
+    letter = letter.upper()
+    return letter_score_map.get(letter, 0)
+
 
 def calculate_word_score(word: str) -> int:
     """
@@ -56,16 +70,7 @@ def calculate_word_score(word: str) -> int:
         raise TypeError("Input parameter to calculate_word_score must be in str format")
 
     score = 0
-    letter_score_map = {
-        1: ["E", "A", "I", "O", "N", "R", "T", "L", "S", "U"], 
-        2: ["D", "G"],
-        3: ["B", "C", "M", "P"],
-        4: ["F", "H", "V", "W", "Y"],
-        5: ["K"],
-        8: ["J", "X"],
-        10: ["Q", "Z"]
-    }
     for letter in word: 
         score += get_letter_score(letter)
     
-    return letter
+    return score
