@@ -16,3 +16,20 @@ Note:
 Author: Hassan Kashif
 """
 
+def calculate_word_score(word: str) -> int:
+    """
+    Calculate the Score of a Given Word in Scrabble.
+
+    This function takes a single word as input and calculates its score based on Scrabble's scoring rules. 
+    Each letter in the word has a point value, and the function sums these values to get the total score of the word.
+
+    Parameters:
+    word (str): The word for which the score is to be calculated. The word should be a valid string 
+                consisting of uppercase or lowercase alphabetic characters. It should not contain any spaces or special characters.
+
+    Returns:
+    int: The total score of the word based on Scrabble letter values.
+
+    Raises:
+    ValueError: If the input is not a string or contains non-alphabetic characters.
+    """

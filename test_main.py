@@ -15,3 +15,17 @@ Note:
 
 Author: Hassan Kashif
 """
+import pytest
+
+from main import calculate_word_score
+
+def test_calculate_word_score_correct_score():
+    test_parameter = "GUARDIAN"
+    expected_return = 10
+    assert calculate_word_score(test_parameter) == expected_return
+
+def test_calculate_word_score_invalid_parameter():
+    test_parameter = ["INAVLID PARAMETER"]
+    with pytest.raises(TypeError):
+        calculate_word_score(test_parameter)
+
