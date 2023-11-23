@@ -17,7 +17,17 @@ Author: Hassan Kashif
 """
 import pytest
 
-from main import calculate_word_score
+from main import get_letter_score, calculate_word_score
+
+def test_get_letter_score_correct_score():
+    test_parameter = "G"
+    expected_return = 2
+    assert get_letter_score(test_parameter) == expected_return
+
+def test_get_letter_score_invalid_parameter():
+    test_parameter = ["INAVLID PARAMETER"]
+    with pytest.raises(TypeError):
+        get_letter_score(test_parameter)    
 
 def test_calculate_word_score_correct_score():
     test_parameter = "GUARDIAN"

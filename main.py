@@ -16,6 +16,25 @@ Note:
 Author: Hassan Kashif
 """
 
+def get_letter_score(letter: str) -> int:
+    """
+    Return the Score associated with a Given Letter in Scrabble.
+
+    This function takes a single letter as input and returns its score based on Scrabble's scoring rules. 
+
+    Parameters:
+    word (str): The letter for which the score is to be returned. The letter should be a valid string 
+                consisting of a uppercase or lowercase alphabetic character.
+
+    Returns:
+    int: The score of the letter based on Scrabble letter values.
+
+    Raises:
+    ValueError: If the input is not a string or contains non-alphabetic characters.
+    """
+    if not isinstance(letter, str):
+        raise TypeError("Input parameter to get_letter_score must be in str format")
+
 def calculate_word_score(word: str) -> int:
     """
     Calculate the Score of a Given Word in Scrabble.
@@ -33,3 +52,20 @@ def calculate_word_score(word: str) -> int:
     Raises:
     ValueError: If the input is not a string or contains non-alphabetic characters.
     """
+    if not isinstance(word, str):
+        raise TypeError("Input parameter to calculate_word_score must be in str format")
+
+    score = 0
+    letter_score_map = {
+        1: ["E", "A", "I", "O", "N", "R", "T", "L", "S", "U"], 
+        2: ["D", "G"],
+        3: ["B", "C", "M", "P"],
+        4: ["F", "H", "V", "W", "Y"],
+        5: ["K"],
+        8: ["J", "X"],
+        10: ["Q", "Z"]
+    }
+    for letter in word: 
+        score += get_letter_score(letter)
+    
+    return letter
