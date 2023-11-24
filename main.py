@@ -20,6 +20,7 @@ import random
 
 NUMBER_OF_TILES = 7
 
+
 def get_words(n: int) -> list:
     """
     Return a list of words based on words found in dictionary.txt. 
@@ -27,13 +28,14 @@ def get_words(n: int) -> list:
     Returns:
     valid_words (list): A list of valid words 
     """
-    with open("dictionary.txt", "r") as file: 
+    with open("dictionary.txt", "r") as file:
         all_words = file.readlines()
-    
+
     return [word.upper() for word in all_words if len(word) <= NUMBER_OF_TILES]
 
 
 WORDS = get_words(NUMBER_OF_TILES)
+
 
 def get_letter_score(letter: str) -> int:
     """
@@ -52,10 +54,11 @@ def get_letter_score(letter: str) -> int:
     ValueError: If the input is not a string or contains non-alphabetic characters.
     """
     if not isinstance(letter, str) or len(letter) != 1 or not letter.isalpha():
-        raise TypeError("Input parameter must be a single alphabetic character string")
+        raise TypeError(
+            "Input parameter must be a single alphabetic character string")
 
     letter_score_map = {
-        "E": 1, "A": 1, "I": 1, "O": 1, "N": 1, "R": 1, "T": 1, "L": 1, "S": 1, "U": 1, 
+        "E": 1, "A": 1, "I": 1, "O": 1, "N": 1, "R": 1, "T": 1, "L": 1, "S": 1, "U": 1,
         "D": 2, "G": 2,
         "B": 3, "C": 3, "M": 3, "P": 3,
         "F": 4, "H": 4, "V": 4, "W": 4, "Y": 4,
@@ -86,9 +89,11 @@ def calculate_word_score(word: str) -> int:
     ValueError: If the input is not a string or contains non-alphabetic characters.
     """
     if not isinstance(word, str) or not word.isalpha():
-        raise TypeError("Input parameter must be a string containing only alphabetic characters")
+        raise TypeError(
+            "Input parameter must be a string containing only alphabetic characters")
 
     return sum(get_letter_score(letter) for letter in word)
+
 
 def assign_tiles(n: int) -> list[str]:
     """
@@ -101,9 +106,11 @@ def assign_tiles(n: int) -> list[str]:
     Returns:
     rack (list[str]): A list containing seven characters, each representing a tile assigned to the player's rack.
     """
-    bag = ["E"] * 12 + ["A", "I"] * 9 + ["O"] * 8 + ["N", "R", "T"] * 6 + ["L", "S", "U", "D"] * 4 + ["G"] * 3 + ["B", "C", "M", "P", "F", "H", "V", "W", "Y"] * 2 + ["K", "J", "X", "Q", "Z"]
-    print(random.sample(bag, 7))
+    bag = ["E"] * 12 + ["A", "I"] * 9 + ["O"] * 8 + ["N", "R", "T"] * 6 + ["L", "S", "U", "D"] * \
+        4 + ["G"] * 3 + ["B", "C", "M", "P", "F", "H",
+                         "V", "W", "Y"] * 2 + ["K", "J", "X", "Q", "Z"]
     return random.sample(bag, 7)
+
 
 def get_valid_words(rack: list[str]) -> set:
     """
@@ -121,7 +128,7 @@ def get_valid_words(rack: list[str]) -> set:
     for word in WORDS:
         word = word.strip().upper()
         temp_rack = rack.copy()
-        
+
         for letter in word:
             if letter in temp_rack:
                 temp_rack.remove(letter)
@@ -131,5 +138,3 @@ def get_valid_words(rack: list[str]) -> set:
             valid_words.add(word)
 
     return valid_words
-
-
